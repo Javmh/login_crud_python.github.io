@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Actualizar Empleado</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="nombre_empleado" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre_empleado" name="nombre_empleado" value="{{ empleado.nombre_empleado }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="apellido_empleado" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido_empleado" name="apellido_empleado" value="{{ empleado.apellido_empleado }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="sexo" class="form-label">Sexo</label>
+            <select class="form-control" id="sexo" name="sexo_empleado" required>
+                <option value="1" {% if empleado.sexo_empleado == 1 %}selected{% endif %}>Masculino</option>
+                <option value="2" {% if empleado.sexo_empleado == 2 %}selected{% endif %}>Femenino</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="telefono_empleado" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="telefono_empleado" name="telefono_empleado" value="{{ empleado.telefono_empleado }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="email_empleado" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email_empleado" name="email_empleado" value="{{ empleado.email_empleado }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="profesion_empleado" class="form-label">Profesión</label>
+            <input type="text" class="form-control" id="profesion_empleado" name="profesion_empleado" value="{{ empleado.profesion_empleado }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="salario_empleado" class="form-label">Salario</label>
+            <input type="number" step="0.01" class="form-control" id="salario_empleado" name="salario_empleado" value="{{ empleado.salario_empleado }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="foto_empleado" class="form-label">Actualizar Foto</label>
+            <input type="file" id="foto_empleado" name="foto_empleado">
+
+    <!-- Mostrar la foto actual si existe -->
+    {% if empleado.foto_empleado %}
+        <img src="{{ url_for('static', filename='uploads/' + empleado.foto_empleado.split('/')[-1]) }}" alt="Foto del empleado" width="100">
+    {% endif %}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{{ url_for('lista_empleados') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

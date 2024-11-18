@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- Mostrar mensaje de éxito -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="mensaje alert-{{ category }} mt-3">
+                {{ message }}, Bienvenido, {{ username }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<h1>INICIO</h1>
+<p>Este es el contenido completo del dashboard.</p>
+
+{% endblock %}

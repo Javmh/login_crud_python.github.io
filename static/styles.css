@@ -1,0 +1,47 @@
+#sidebar {
+    transition: all 0.3s;
+}
+
+#sidebar .nav-link:hover {
+    background-color: #495057;
+    border-radius: 5px;
+}
+
+#main-content {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* div del mensaje de inicio sesion */
+.mensaje {
+    width: 60%; /* Reduce el tamaño al 50% del ancho del contenedor */
+    margin: 20px auto; /* Centra el div horizontalmente */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle énfasis */
+    font-size: 16px; /* Ajusta el tamaño del texto */
+    text-align: center;
+    height: 10%;
+    background-color: aquamarine;
+}
+
+
+/* estilos utilizados para registro de empleados */
+form label {
+    font-weight: bold;
+}
+
+form .form-control {
+    border-radius: 8px;
+}
+
+form button {
+    border-radius: 25px;
+}
+
+.container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}

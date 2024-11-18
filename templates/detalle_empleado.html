@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<div class="container py-4">
+    <h2>Detalles del Empleado</h2>
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+            <h4>{{ empleado.nombre_empleado }} {{ empleado.apellido_empleado }}</h4>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <!-- Corrección de la ruta de la imagen -->
+                    <br />
+                    <img style="width: 200px" src="{{ url_for('static', filename='uploads/' ~ empleado.foto_empleado) }}"
+                      alt="imagen-empleado" />
+                    <!--<img src="{{ url_for('static', filename='uploads/perfil.jpg') }}" alt="Imagen de Empleado" />-->
+                </div>
+            <div class="col-md-8">
+                    <p><strong>Nombre:</strong> {{ empleado.nombre_empleado }}</p>
+                    <p><strong>Apellido:</strong> {{ empleado.apellido_empleado }}</p>
+                    <p><strong>Sexo:</strong> {{ 'Hombre' if empleado.sexo_empleado == 1 else 'Mujer' }}</p>
+                    <p><strong>Teléfono:</strong> {{ empleado.telefono_empleado }}</p>
+                    <p><strong>Email:</strong> {{ empleado.email_empleado }}</p>
+                    <p><strong>Profesión:</strong> {{ empleado.profesion_empleado }}</p>
+                    <p><strong>Salario:</strong> S/. {{ '{:,.0f}'.format(empleado.salario_empleado).replace(',', '.') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{ url_for('lista_empleados') }}" class="btn btn-secondary">Volver a la Lista</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

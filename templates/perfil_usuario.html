@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}Mi Perfil{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="mensaje alert alert-{{ category }} mt-3">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">MI PERFIL</h1>
+    </div>
+    <div class="form-container mx-auto" style="max-width: 500px;">
+        <form method="POST" action="{{ url_for('perfil') }}">
+            <div class="mb-3">
+                <label for="name_surname" class="form-label">Usuario</label>
+                <input
+                    type="text"
+                    name="name_surname"
+                    value="{{ info_perfil_session['name_surname'] }}"
+                    class="form-control"
+                    readonly />
+            </div>
+            <div class="mb-3">
+                <label for="email_user" class="form-label">Email</label>
+                <input
+                    class="form-control"
+                    type="email"
+                    name="email_user"
+                    value="{{ info_perfil_session['email_user'] }}"
+                    readonly />
+            </div>
+           <div class="mb-3 form-password-toggle">
+                <label class="form-label" for="clave_actual">Clave Actual</label>
+                <div class="input-group input-group-merge">
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="clave_actual"
+                    id="clave_actual"
+                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                    aria-describedby="password" />
+                  <span class="input-group-text cursor-pointer">
+                    <i class="bx bx-hide"></i>
+                  </span>
+                </div>
+              </div>
+          <!-- Tu código HTML del formulario -->
+<div class="mb-3">
+    <label for="nueva_clave" class="form-label">Nueva Contraseña</label>
+    <div class="input-group">
+        <input type="password" class="form-control" name="nueva_clave" id="nueva_clave" required>
+        <!-- Icono de vista -->
+        <span class="input-group-text" id="toggle-password-new">
+            <i class="bi bi-eye-slash" id="eye-icon-new"></i>
+        </span>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label for="repetir_clave" class="form-label">Repetir Nueva Contraseña</label>
+    <div class="input-group">
+        <input type="password" class="form-control" name="repetir_clave" id="repetir_clave" required>
+        <!-- Icono de vista -->
+        <span class="input-group-text" id="toggle-password-repeat">
+            <i class="bi bi-eye-slash" id="eye-icon-repeat"></i>
+        </span>
+    </div>
+</div>
+
+<!-- Librería de iconos de Bootstrap (opcional) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Incluir el código JavaScript al final de la página -->
+<script>
+    // Código JavaScript para alternar la visibilidad de las contraseñas
+    document.getElementById('toggle-password-new').addEventListener('click', function() {
+        const passwordField = document.getElementById('nueva_clave');
+        const eyeIcon = document.getElementById('eye-icon-new');
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";  // Mostrar la contraseña
+            eyeIcon.classList.remove("bi-eye-slash");
+            eyeIcon.classList.add("bi-eye");
+        } else {
+            passwordField.type = "password";  // Ocultar la contraseña
+            eyeIcon.classList.remove("bi-eye");
+            eyeIcon.classList.add("bi-eye-slash");
+        }
+    });
+
+    // Repetir el proceso para el campo "repetir_clave"
+    document.getElementById('toggle-password-repeat').addEventListener('click', function() {
+        const passwordField = document.getElementById('repetir_clave');
+        const eyeIcon = document.getElementById('eye-icon-repeat');
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";  // Mostrar la contraseña
+            eyeIcon.classList.remove("bi-eye-slash");
+            eyeIcon.classList.add("bi-eye");
+        } else {
+            passwordField.type = "password";  // Ocultar la contraseña
+            eyeIcon.classList.remove("bi-eye");
+            eyeIcon.classList.add("bi-eye-slash");
+        }
+    });
+</script>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Actualizar mis datos</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

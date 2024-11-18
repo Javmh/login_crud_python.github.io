@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="mensaje alert-{{ category }} mt-3">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="container-fluid p-4">
+    <h3 class="mb-4">Lista de Empleados</h3>
+    <!-- Formulario de búsqueda -->
+    <form action="{{ url_for('lista_empleados') }}" method="POST" class="mb-3">
+        <input type="text" name="search_term" placeholder="Buscar empleado..." value="{{ search_term }}" class="form-control">
+        <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+    </form>
+   
+    </div>
+        
+    <table class="table table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Sexo</th>
+                <th>Salario</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empleado in empleados %}
+            <tr id="empleado_{{ empleado.id_empleado }}">
+                <td>{{ loop.index }}</td>
+                <td>{{ empleado.nombre_empleado }}</td>
+                <td>{{ empleado.apellido_empleado }}</td>
+                <td>
+                    {% if empleado.sexo_empleado == 1 %}
+                        Hombre
+                    {% elif empleado.sexo_empleado == 2 %}
+                        Mujer
+                    {% else %}
+                        No especificado
+                    {% endif %}
+                </td>
+                <td>
+                    S/. {{ '{:,.0f}'.format(empleado.salario_empleado).replace(',', '.') }}
+                </td>
+                <td>
+                    <a href="{{ url_for('detalle_empleado', id_empleado=empleado.id_empleado) }}" class="btn btn-info btn-sm">Ver detalles</a>
+                    <a href="{{ url_for('actualizar_empleado', id_empleado=empleado.id_empleado) }}" class="btn btn-success btn-sm">Actualizar</a>
+                    <form action="{{ url_for('eliminar_empleado', id_empleado=empleado.id_empleado) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">
+                            Eliminar
+                        </button>
+                    </form>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
